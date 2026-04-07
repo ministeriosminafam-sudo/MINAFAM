@@ -9,7 +9,7 @@ export default function Hero() {
         <h1>Ministerio Nacional de Matrimonios y Familias</h1>
         <p className="hero-subtitle">
           Transformando vidas, fortaleciendo familias y construyendo comunidad<br />
-          a través de la fe, el amor y el servicio.
+          a través de la fe, el amor y el servicio. 
         </p>
         <div className="hero-btns">
           <Link href="/como-ser-parte" className="btn btn-primary">Únete a nosotros</Link>
