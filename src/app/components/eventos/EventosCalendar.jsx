@@ -139,6 +139,7 @@ export default function EventosCalendar({
 
   const eventosDelDia = eventosPorFecha.get(fechaSeleccionada) ?? [];
   const eventoPrincipal = eventosDelDia[eventoActivoIndex] ?? eventosDelDia[0] ?? null;
+  const etiquetaSesionActual = eventoPrincipal?.etiquetaSesion;
 
   const eventosEnMesActual = useMemo(
     () =>
@@ -319,10 +320,16 @@ export default function EventosCalendar({
                         onClick={() => setEventoActivoIndex(index)}
                         aria-pressed={eventoActivoIndex === index}
                       >
-                        Evento {index + 1}
+                        {evento.etiquetaSesion || `Sesion ${index + 1} clase`}
                       </button>
                     ))}
                   </div>
+                )}
+
+                {etiquetaSesionActual && (
+                  <p className="evento-banner-session-label">
+                    {etiquetaSesionActual}
+                  </p>
                 )}
 
                 <p className="evento-banner-date">

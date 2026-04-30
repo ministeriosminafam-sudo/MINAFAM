@@ -2,6 +2,23 @@ function toDate(fecha) {
   return new Date(`${fecha}T12:00:00`);
 }
 
+function getEtiquetaSesion(numeroSesion) {
+  const etiquetas = [
+    'Primera',
+    'Segunda',
+    'Tercera',
+    'Cuarta',
+    'Quinta',
+    'Sexta',
+    'Septima',
+    'Octava',
+    'Novena',
+    'Decima',
+  ];
+
+  return etiquetas[numeroSesion - 1] || `Sesion ${numeroSesion}`;
+}
+
 export function getEventoFechas(evento) {
   const sesiones =
     Array.isArray(evento.fechas) && evento.fechas.length > 0
@@ -64,6 +81,8 @@ export function expandEventosPorFechas(eventos) {
       idSesion: `${evento.id}-${sesion.fecha}-${index}`,
       eventoBaseId: evento.id,
       totalSesiones: sesiones.length,
+      numeroSesion: index + 1,
+      etiquetaSesion: `${getEtiquetaSesion(index + 1)} clase`,
     }));
   });
 }

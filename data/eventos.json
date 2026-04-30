@@ -19,101 +19,120 @@
     "id": "CursoMatrimonios",
     "nombre": "Sanando y Fortaleciendo Matrimonios - 1",
     "fechas": [
-      "2026-05-03",
-      "2026-05-10",
-      "2026-05-17",
-      "2026-05-24",
-      "2026-05-31"
+      "2026-05-03", //1° clase
+      "2026-05-10", //2° clase
+      "2026-05-17", //3° clase
+      "2026-05-24", //4° clase
+      "2026-05-31", //5° clase
+      "2026-06-07", //6° clase
+      "2026-06-14", //7° clase
+      "2026-06-21", //8° clase
+      "2026-06-28", //9° clase
+      "2026-07-05", //10° clase
+      "2026-07-12", //11° clase
+      "2026-07-19", //12° clase
+      "2026-07-26", //13° clase
+      "2026-08-02", //14° clase
+      "2026-08-09", //15° clase
+      "2026-08-16", //16° clase
+      "2026-08-23", //17° clase
+      "2026-08-30" //18° clase
     ],
     "hora_inicio": "16:00",
     "hora_fin": "18:00",
-    "ubicacion": "PRESENCIAL- Centro de convenciones Carapongo",
+    "ubicacion": "PRESENCIAL- Centro de convenciones Carapongo  y templo Vitarte",
     "ministerio": "Matrimonios y Familias",
     "iglesia": "IEP vitarte",
-    "descripcion": "Instructores: Pr. Liberato Villa & Carmen Meza",
+    "descripcion": "Instructores: Pr. Jaime Espiritu y Betty Javier",
     "descriptionLarga": "Taller presencial para parejas que buscan restaurar y fortalecer su vínculo matrimonial.",
-    "precio": "Inscripciones Abiertas",
+    "precio": "20 soles (por pareja)",
     "capacidad": 2000,
-    "imagen": "/images/flyercursos/matrimonios.png",
-
+    "imagen": "/images/flyercursos/PostMatrimonios.png",
     "featured": true
   },
   {
     "id": "CursoAntesde",
-    "nombre": "Antes de Decir Sí - Curso para Novios",
+    "nombre": "Antes de Decir Sí - Curso para Jovenes",
     "fechas": [
-      "2026-05-07",
-      "2026-05-14",
-      "2026-05-21",
-      "2026-05-28",
-      "2026-06-04",
-      "2026-06-11",
-      "2026-06-18",
-      "2026-06-25",
-      "2026-07-02"
-    ],
-    "hora_inicio": "20:30",
-    "hora_fin": "22:00",
-    "ubicacion": "Virtual- Google Meet",
-    "ministerio": "Novios",
-    "iglesia": "IEP vitarte",
-    "descripcion": "Instructores: Pr. Liberato Villa & Carmen Meza",
-    "descriptionLarga": "Dirigido a adolescentes y jóvenes que buscan conocer más acerca de su identidad, sanidad y madurez emocional y espiritual, permitiéndoles tomar decisiones sabias para disfrutar cada etapa de su vida y prepararse para bendecir a sus generaciones.",
-    "precio": "Inscripciones Abiertas",
-    "capacidad": 2000,
-    "imagen": "/images/flyercursos/antesdedecirsi.png",
-    "featured": true
-  },
-  {
-    "id": "CursoAntesdeseruno",
-    "nombre": "Antes de ser uno - Curso para Jovenes",
-    "fechas": [
-      "2026-05-04",
-      "2026-05-11",
-      "2026-05-18",
-      "2026-05-25",
-      "2026-06-01",
-      "2026-06-08",
-      "2026-06-15",
-      "2026-06-22",
-      "2026-06-29"
+      "2026-05-21", //1° clase
+      "2026-05-28", //2° clase
+      "2026-06-04", //3° clase
+      "2026-06-11", //4° clase
+      "2026-06-18", //5° clase
+      "2026-06-25", //6° clase
+      "2026-07-02", //7° clase
+      "2026-07-09", //8° clase
+      "2026-07-16", //9° clase
+      "2026-07-23"  //10° clase
     ],
     "hora_inicio": "20:30",
     "hora_fin": "22:00",
     "ubicacion": "Virtual- Google Meet",
     "ministerio": "Jovenes",
     "iglesia": "IEP vitarte",
-    "descripcion": "Instructores: Pr. Liberato Villa & Carmen Meza",
-    "descriptionLarga": "Este curso es una guía práctica y espiritual diseñada para parejas en etapa de noviazgo que desean prepararse en serio para el matrimonio, poniendo a Cristo como la base de su proyecto de vida.",
-    "precio": "Inscripciones Abiertas",
+    "descripcion": "Instructores: Pr. Paul Quispe y Mayra",
+    "descriptionLarga": "Dirigido a adolescentes y jóvenes que buscan conocer más acerca de su identidad, sanidad y madurez emocional y espiritual, permitiéndoles tomar decisiones sabias para disfrutar cada etapa de su vida y prepararse para bendecir a sus generaciones.",
+    "precio": "10 soles (Consulte por becas completas)",
     "capacidad": 2000,
-    "imagen": "/images/flyercursos/antesdeseruno.png",
+    "imagen": "/images/flyercursos/PostADDS.png",
+    "featured": true
+  },
+  {
+    "id": "CursoAntesdeseruno",
+    "nombre": "Antes de ser uno - Curso para Novios",
+    "fechas": [
+      "2026-05-18", //1° clase
+      "2026-05-25", //2° clase
+      "2026-06-01", //3° clase
+      "2026-06-08", //4° clase
+      "2026-06-15", //5° clase
+      "2026-06-22", //6° clase
+      "2026-06-29", //7° clase
+      "2026-07-06", //8° clase
+      "2026-07-13", //9° clase
+      "2026-07-20", //10° clase
+      "2026-07-27"  //11° clase
+    ],
+    "hora_inicio": "20:30",
+    "hora_fin": "22:00",
+    "ubicacion": "Virtual- Google Meet",
+    "ministerio": "Novios",
+    "iglesia": "IEP vitarte",
+    "descripcion": "Instructores: Pr. Hector Yaranga y Katy",
+    "descriptionLarga": "Este curso es una guía práctica y espiritual diseñada para parejas en etapa de noviazgo que desean prepararse en serio para el matrimonio, poniendo a Cristo como la base de su proyecto de vida.",
+    "precio": "20 soles (inscripción)",
+    "capacidad": 2000,
+    "imagen": "/images/flyercursos/PostADSU.png",
     "featured": true
   },
   {
     "id": "finanzas",
     "nombre": "Curso de Finanzas",
     "fechas": [
-      "2026-05-06",
-      "2026-05-13",
-      "2026-05-20",
-      "2026-05-27",
-      "2026-06-03",
-      "2026-06-10",
-      "2026-06-17",
-      "2026-06-24",
-      "2026-06-31"
+      "2026-05-20", //1° clase
+      "2026-05-27", //2° clase
+      "2026-06-03", //3° clase
+      "2026-06-10", //4° clase
+      "2026-06-17", //5° clase
+      "2026-06-24", //6° clase
+      "2026-07-01", //7° clase
+      "2026-07-08", //8° clase
+      "2026-07-15", //9° clase
+      "2026-07-22", //10° clase
+      "2026-07-29", //11° clase
+      "2026-08-05", //12° clase
+      "2026-08-12"  //13° clase
     ],
     "hora_inicio": "20:30",
     "hora_fin": "22:00",
     "ubicacion": "Virtual- Google Meet",
     "ministerio": "Finanzas",
     "iglesia": "IEP vitarte",
-    "descripcion": "Instructores : Pr. Liberato Villa & Carmen Meza",
+    "descripcion": "Instructores : Pr. Cesar Atachagua y Karen",
     "descriptionLarga": "El tema de finanzas ha sido y seguirá siendo un peso muy grande para la vida humana y el matrimonio, no sol porque tiene la disponibilidad o no tiene, más bien es por su capacidad de administrar lo que tiene, porque para una persona que le falta conocimiento si tiene poco es un problema y si tiene mucho es un problema.",
-    "precio": "Inscripciones Abiertas",
+    "precio": "20 soles (por pareja)",
     "capacidad": 2000,
-    "imagen": "/images/flyercursos/finanzas.png",
+    "imagen": "/images/flyercursos/PostFinanzas.png",
     "featured": true
   }
 ]
