@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import RegistroInscripcionPopup from './RegistroInscripcionPopup';
 import { getEventoFechas, getEventosOrdenados } from '../../../utils/eventos';
@@ -10,11 +12,19 @@ function isCurso(evento) {
 
 export default function CursosCatalogo({ eventos }) {
   const [eventoRegistroActivo, setEventoRegistroActivo] = useState(null);
-
+  const router = useRouter();
   const cursos = useMemo(
     () => getEventosOrdenados((eventos || []).filter((evento) => isCurso(evento))),
     [eventos]
   );
+
+  const cursoSlugById = {
+    CursoMatrimonios: 'CursoMatrimonios',
+    CursoAntesde: 'cursoantesdecirsi',
+    CursoAntesdeseruno: 'CursoAntesdeseruno',
+    finanzas: 'finanzas',
+    CursoMatrimoniosvirtual: 'CursoMatrimoniosvirtual',
+  };
 
   return (
     <>
@@ -41,36 +51,79 @@ export default function CursosCatalogo({ eventos }) {
                   ),
                 ];
 
+                const cursoSlug = cursoSlugById[ev.id];
+                const cursoHref = cursoSlug ? `/cursos/${cursoSlug}` : null;
+
                 return (
-                  <article className="evento-full-card curso-evento-card" key={ev.id}>
-                    <div className="evento-full-img">
-                      <img
-                        src={
-                          ev.imagen ||
-                          `https://placehold.co/350x220/c0392b/ffffff?text=${encodeURIComponent(ev.nombre)}`
-                        }
-                        alt={ev.nombre}
-                      />
-                      {ev.featured && <span className="evento-badge">Destacado</span>}
+                  <article
+                    className="evento-full-card curso-evento-card"
+                    key={ev.id}
+                    role={cursoHref ? 'link' : undefined}
+                    tabIndex={cursoHref ? 0 : undefined}
+                    aria-label={cursoHref ? `Ver detalles de ${ev.nombre}` : undefined}
+                    onClick={() => {
+                      if (cursoHref) {
+                        router.push(cursoHref);
+                      }
+                    }}
+                    onKeyDown={(event) => {
+                      if (!cursoHref) return;
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        router.push(cursoHref);
+                      }
+                    }}
+                  >
+                    <div className="curso-evento-media-link">
+                      <div className="evento-full-img">
+                        <img
+                          src={
+                            ev.imagen ||
+                            `https://placehold.co/350x220/c0392b/ffffff?text=${encodeURIComponent(ev.nombre)}`
+                          }
+                          alt={ev.nombre}
+                        />
+                        {ev.featured && <span className="evento-badge">Destacado</span>}
+                      </div>
                     </div>
 
                     <div className="evento-full-body">
-                      <h2>{ev.nombre}</h2>
-                      <p>{ev.descripcion || ev.descriptionLarga}</p>
+                      <div className="curso-evento-info-link">
+                        <h2>{ev.nombre}</h2>
+                        <p>{ev.descripcion || ev.descriptionLarga}</p>
 
-                      <ul className="evento-detalles">
-                        {horarios.length > 0 && (
-                          <li><i className="fas fa-clock"></i> {horarios.join(' • ')}</li>
-                        )}
-                        <li><i className="fas fa-map-marker-alt"></i> {ev.ubicacion}</li>
-                        <li><i className="fas fa-ticket-alt"></i> {ev.precio}</li>
-                      </ul>
+                        <ul className="evento-detalles">
+                          {horarios.length > 0 && (
+                            <li><i className="fas fa-clock"></i> {horarios.join(' • ')}</li>
+                          )}
+                          <li><i className="fas fa-map-marker-alt"></i> {ev.ubicacion}</li>
+                          <li><i className="fas fa-ticket-alt"></i> {ev.precio}</li>
+                        </ul>
+
+                        <span className="curso-evento-ver-mas">
+                          Ver detalles <i className="fas fa-arrow-right"></i>
+                        </span>
+                      </div>
 
                       <div className="evento-full-actions">
+                        {cursoHref ? (
+                          <Link
+                            href={cursoHref}
+                            className="btn btn-outline"
+                            onClick={(event) => event.stopPropagation()}
+                          >
+                            Ver detalles
+                          </Link>
+                        ) : (
+                          <span className="btn btn-outline">Ver detalles</span>
+                        )}
                         <button
                           type="button"
                           className="btn btn-primary"
-                          onClick={() => setEventoRegistroActivo(ev)}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            setEventoRegistroActivo(ev);
+                          }}
                         >
                           Registrarse
                         </button>
