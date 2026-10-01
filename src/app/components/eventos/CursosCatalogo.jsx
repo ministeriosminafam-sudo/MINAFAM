@@ -10,8 +10,16 @@ function isCurso(evento) {
   return String(evento?.ministerio || '').trim().toLowerCase() !== 'general';
 }
 
+const whatsappCursoNumbers = {
+  CursoAntesdeseruno: '51949155349',
+  finanzas: '',
+  CursoAntesde: '51944496494',
+  CursoMatrimoniosvirtual: '',
+};
+
 export default function CursosCatalogo({ eventos }) {
-  const [eventoRegistroActivo, setEventoRegistroActivo] = useState(null);
+  const [eventoInformacionActivo, setEventoInformacionActivo] = useState(null);
+  const [eventoInscripcionActivo, setEventoInscripcionActivo] = useState(null);
   const router = useRouter();
   const cursos = useMemo(
     () => getEventosOrdenados((eventos || []).filter((evento) => isCurso(evento))),
@@ -19,7 +27,6 @@ export default function CursosCatalogo({ eventos }) {
   );
 
   const cursoSlugById = {
-    CursoMatrimonios: 'CursoMatrimonios',
     CursoAntesde: 'cursoantesdecirsi',
     CursoAntesdeseruno: 'CursoAntesdeseruno',
     finanzas: 'finanzas',
@@ -122,10 +129,20 @@ export default function CursosCatalogo({ eventos }) {
                           className="btn btn-primary"
                           onClick={(event) => {
                             event.stopPropagation();
-                            setEventoRegistroActivo(ev);
+                            setEventoInformacionActivo(ev);
                           }}
                         >
-                          Registrarse
+                          Necesito información
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            setEventoInscripcionActivo(ev);
+                          }}
+                        >
+                          Inscribirse al curso
                         </button>
                       </div>
                     </div>
@@ -138,8 +155,15 @@ export default function CursosCatalogo({ eventos }) {
       </section>
 
       <RegistroInscripcionPopup
-        evento={eventoRegistroActivo}
-        onClose={() => setEventoRegistroActivo(null)}
+        evento={eventoInformacionActivo}
+        whatsappNumero={whatsappCursoNumbers[eventoInformacionActivo?.id] || ''}
+        modoWhatsApp
+        onClose={() => setEventoInformacionActivo(null)}
+      />
+      <RegistroInscripcionPopup
+        evento={eventoInscripcionActivo}
+        flujoPagoCurso
+        onClose={() => setEventoInscripcionActivo(null)}
       />
     </>
   );

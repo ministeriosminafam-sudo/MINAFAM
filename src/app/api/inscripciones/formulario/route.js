@@ -32,6 +32,20 @@ function sanitizeMessage(value) {
   return String(value || '').trim();
 }
 
+function sanitizeReceipt(value) {
+  if (!value || typeof value !== 'object') return null;
+
+  const nombre = String(value.nombre || '').trim();
+  const tipo = String(value.tipo || '').trim().toLowerCase();
+  const contenido = String(value.contenido || '').trim();
+
+  if (!nombre || !tipo.startsWith('image/') || !contenido.startsWith('data:image/')) {
+    return null;
+  }
+
+  return { nombre, tipo, contenido };
+}
+
 export async function POST(request) {
   let body;
 
@@ -48,6 +62,8 @@ export async function POST(request) {
   const telefono = sanitizePhone(body?.telefono);
   const mensaje = sanitizeMessage(body?.mensaje);
   const cursoId = String(body?.cursoId || '').trim();
+  const requiereComprobante = body?.requiereComprobante === true;
+  const comprobante = sanitizeReceipt(body?.comprobante);
 
   if (nombre.length < 2) {
     return NextResponse.json(
@@ -67,6 +83,13 @@ export async function POST(request) {
   if (!cursoId) {
     return NextResponse.json(
       { error: 'Selecciona un curso.' },
+      { status: 400 }
+    );
+  }
+
+  if (requiereComprobante && !comprobante) {
+    return NextResponse.json(
+      { error: 'Adjunta una captura válida del pago.' },
       { status: 400 }
     );
   }
@@ -91,6 +114,7 @@ export async function POST(request) {
     seccionPrincipal: 'formularios cursos',
     ministerio,
     seccionesDestino: [seccionMinisterio],
+    ...(comprobante ? { comprobante } : {}),
   };
 
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
@@ -115,12 +139,23 @@ export async function POST(request) {
     });
 
     const responseText = await response.text();
+    let webhookData = null;
 
-    if (!response.ok) {
+    try {
+      webhookData = JSON.parse(responseText);
+    } catch {
+      webhookData = null;
+    }
+
+    const comprobanteNoConfirmado = requiereComprobante && !webhookData?.comprobanteUrl;
+
+    if (!response.ok || webhookData?.ok === false || comprobanteNoConfirmado) {
       return NextResponse.json(
         {
           error: 'Google Sheets rechazó la solicitud.',
-          detail: responseText.slice(0, 400),
+          detail: webhookData?.error || (comprobanteNoConfirmado
+            ? 'Apps Script no devolvió el enlace del comprobante. Verifica que la implementación desplegada incluya DriveApp y la columna COMPROBANTE.'
+            : responseText.slice(0, 400)),
         },
         { status: 502 }
       );
@@ -129,6 +164,7 @@ export async function POST(request) {
     return NextResponse.json({
       ok: true,
       message: 'Inscripción enviada correctamente.',
+      comprobanteUrl: webhookData?.comprobanteUrl || null,
     });
   } catch {
     return NextResponse.json(

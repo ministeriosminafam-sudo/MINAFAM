@@ -34,6 +34,23 @@ function toDate(fecha) {
   return new Date(`${fecha}T12:00:00`);
 }
 
+function getPeruToday() {
+  const partes = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Lima',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  }).formatToParts(new Date());
+
+  const valores = Object.fromEntries(
+    partes
+      .filter(({ type }) => type !== 'literal')
+      .map(({ type, value }) => [type, Number(value)])
+  );
+
+  return new Date(valores.year, valores.month - 1, valores.day, 12);
+}
+
 function formatDateKey(fecha) {
   const year = fecha.getFullYear();
   const month = String(fecha.getMonth() + 1).padStart(2, '0');
@@ -81,18 +98,20 @@ export default function EventosCalendar({
   );
 
   const mesInicial = useMemo(() => {
-    if (eventosOrdenados.length === 0) {
-      const hoy = new Date();
-      return new Date(hoy.getFullYear(), hoy.getMonth(), 1);
-    }
+    const hoy = getPeruToday();
+    return new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+  }, []);
 
-    const primeraFecha = toDate(eventosOrdenados[0].fecha);
-    return new Date(primeraFecha.getFullYear(), primeraFecha.getMonth(), 1);
-  }, [eventosOrdenados]);
+  const primeraFechaSeleccionada = useMemo(() => {
+    const hoy = getPeruToday();
+    const siguienteEvento = eventosOrdenados.find((evento) => toDate(evento.fecha) >= hoy);
+
+    return siguienteEvento?.fecha || eventosOrdenados[0]?.fecha || formatDateKey(mesInicial);
+  }, [eventosOrdenados, mesInicial]);
 
   const [mesActual, setMesActual] = useState(mesInicial);
   const [fechaSeleccionada, setFechaSeleccionada] = useState(
-    eventosOrdenados[0]?.fecha ?? formatDateKey(mesInicial)
+    primeraFechaSeleccionada
   );
   const [eventoActivoIndex, setEventoActivoIndex] = useState(0);
 
@@ -121,7 +140,12 @@ export default function EventosCalendar({
       return;
     }
 
-    setFechaSeleccionada(formatDateKey(new Date(year, month, 1)));
+    const hoy = getPeruToday();
+    const esMesActual = hoy.getFullYear() === year && hoy.getMonth() === month;
+
+    setFechaSeleccionada(
+      formatDateKey(esMesActual ? hoy : new Date(year, month, 1))
+    );
   }, [mesActual, eventosOrdenados]);
 
   useEffect(() => {

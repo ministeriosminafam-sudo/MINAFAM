@@ -1216,6 +1216,12 @@ ul { list-style: none; }
   box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.14);
 }
 
+.registro-formulario-textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
 .registro-llamada-submit {
   margin-top: 2px;
   min-height: 48px;
@@ -1224,6 +1230,62 @@ ul { list-style: none; }
 .registro-llamada-submit[disabled] {
   opacity: .75;
   cursor: not-allowed;
+}
+
+.registro-pago-instrucciones {
+  margin: 22px 0 8px;
+  padding: 18px;
+  border: 1px solid #ffd0c5;
+  border-radius: 12px;
+  background: #fff4f1;
+  color: #4b5e75;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.registro-pago-instrucciones p {
+  margin: 0 0 10px;
+}
+
+.registro-pago-instrucciones p:last-child {
+  margin: 10px 0 0;
+}
+
+.registro-pago-numero {
+  display: block;
+  color: var(--red);
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+}
+
+.registro-pago-qr {
+  display: block;
+  width: min(220px, 100%);
+  height: auto;
+  margin: 16px auto;
+  border-radius: 8px;
+}
+
+.registro-pago-continuar {
+  display: block;
+  margin: 14px auto 0;
+}
+
+.registro-comprobante-input {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px dashed var(--gray-light);
+  border-radius: 10px;
+  color: var(--dark-2);
+  background: #f8fafc;
+}
+
+.registro-comprobante-nombre {
+  margin: 0;
+  color: #0b7a46;
+  font-size: .9rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 .registro-llamada-feedback {
@@ -1256,6 +1318,28 @@ ul { list-style: none; }
   font-weight: 800;
   line-height: 1.2;
   color: #0b7a46;
+}
+
+.registro-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 22px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  background: #16a765;
+  color: var(--white);
+  font-family: var(--font-main);
+  font-size: .95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.registro-whatsapp-btn:hover {
+  background: #0e874f;
+  transform: translateY(-2px);
 }
 
 .registro-popup-option i {
