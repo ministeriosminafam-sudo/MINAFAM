@@ -22,7 +22,7 @@ export default function RegistroInscripcionPopup({
   const [feedback, setFeedback] = useState({ tipo: 'idle', mensaje: '' });
 
   const precioCurso = {
-    CursoAntesdeseruno: '10 soles',
+    CursoAntesdeseruno: '20 soles por pareja',
     finanzas: '20 soles por pareja',
     CursoAntesde: '10 soles',
     CursoMatrimoniosvirtual: '20 soles por pareja',
