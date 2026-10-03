@@ -12,7 +12,7 @@ function isCurso(evento) {
 
 const whatsappCursoNumbers = {
   CursoAntesdeseruno: '51949155349',
-  finanzas: '',
+  finanzas: '51910364746',
   CursoAntesde: '51944496494',
   CursoMatrimoniosvirtual: '',
 };
